@@ -1,5 +1,3 @@
-import Data.List.Split
-
 parseString :: String -> [String]
 parseString = words . map (\c -> if c == ':' || c == '-' then ' ' else c)
 
