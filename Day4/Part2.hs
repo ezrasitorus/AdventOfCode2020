@@ -1,7 +1,6 @@
-import Data.List
-import Data.List.Split
-import Data.Char
-import Data.Maybe
+import Data.List.Split ( splitOn )
+import Data.Char ( isNumber )
+import Data.Maybe ( fromJust )
 
 required :: [String]
 required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]

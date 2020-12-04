@@ -1,5 +1,4 @@
-import Data.List
-import Data.List.Split
+import Data.List.Split ( splitOn )
 
 required :: [String]
 required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
