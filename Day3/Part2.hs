@@ -1,8 +1,8 @@
 positions :: Int -> [Int]
-positions right = [mod (right * n) 31| n <- [0..]]
+positions right = [mod (right * n) 31 | n <- [0 ..]]
 
 spots :: Int -> [String] -> [Int] -> String
-spots down paths = zipWith (!!) [paths !! (n * down) | n <- [0..div (length paths) down - 1]]
+spots down paths = zipWith (!!) [paths !! (n * down) | n <- [0 .. div (length paths) down - 1]]
 
 numOfTrees :: String -> Int
 numOfTrees = length . filter (== '#')
@@ -15,6 +15,6 @@ treesOnPaths mapOfPlace = map (\(right, down) -> numOfTrees $ spots down mapOfPl
 
 main :: IO ()
 main = do
-    input <- readFile "input.txt"
-    let map = lines input
-    print $ (product . treesOnPaths) map
+  input <- readFile "input.txt"
+  let map = lines input
+  print $ (product . treesOnPaths) map
