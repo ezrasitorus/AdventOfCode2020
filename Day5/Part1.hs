@@ -6,8 +6,9 @@ findRow (s : ss) (l, u)
 
 findColumn :: String -> (Int, Int) -> Int
 findColumn [] (n, _) = n
-findColumn ('L' : ss) (l, u) = findColumn ss (l, div (u + l + 1) 2)
-findColumn ('R' : ss) (l, u) = findColumn ss (div (u + l + 1) 2, u)
+findColumn (s : ss) (l, u)
+  | s == 'L' = findColumn ss (l, div (u + l + 1) 2)
+  | s == 'R' = findColumn ss (div (u + l + 1) 2, u)
 
 findSeat :: String -> (Int, Int)
 findSeat boardingPass = (findRow row (0, 127), findColumn column (0, 7))
