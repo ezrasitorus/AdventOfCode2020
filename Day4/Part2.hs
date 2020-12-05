@@ -1,6 +1,6 @@
-import Data.List.Split ( splitOn )
-import Data.Char ( isNumber )
-import Data.Maybe ( fromJust )
+import Data.Char (isNumber)
+import Data.List.Split (splitOn)
+import Data.Maybe (fromJust)
 
 required :: [String]
 required = ["byr", "iyr", "eyr", "hgt", "hcl", "ecl", "pid"]
@@ -16,12 +16,13 @@ eyrValid eyr = read eyr >= 2020 && read eyr <= 2030
 
 hgtValid :: String -> Bool
 hgtValid hgt
-    | elem 'c' hgt =  hgt_num >= 150 && hgt_num <= 193
-    | otherwise =  hgt_num >= 59 &&  hgt_num <= 76
-    where  hgt_num = read $ takeWhile isNumber hgt
+  | elem 'c' hgt = hgt_num >= 150 && hgt_num <= 193
+  | otherwise = hgt_num >= 59 && hgt_num <= 76
+  where
+    hgt_num = read $ takeWhile isNumber hgt
 
 hclValid :: String -> Bool
-hclValid ('#':hcl) = length hcl == 6 && all (\x -> elem x "abcdef" || isNumber x) hcl
+hclValid ('#' : hcl) = length hcl == 6 && all (\x -> elem x "abcdef" || isNumber x) hcl
 hclValid _ = False
 
 eclValid :: String -> Bool
@@ -43,13 +44,14 @@ isValid :: [(String, String)] -> Bool
 isValid = all (\(f, d) -> (fromJust $ lookup f validityChecks) d)
 
 paragraphs :: [String] -> [[String]]
-paragraphs = splitOn [""] 
+paragraphs = splitOn [""]
 
 getPassportField :: String -> (String, String)
 getPassportField s = (f, d)
-    where [f,d] = splitOn ":" s
+  where
+    [f, d] = splitOn ":" s
 
 main :: IO ()
 main = do
-    input <- readFile "input.txt"
-    print $ length $ filter (\x -> isValid x && potentiallyValid x) $ (map (map getPassportField . concatMap words) . paragraphs . lines) input
+  input <- readFile "input.txt"
+  print $ length $ filter (\x -> isValid x && potentiallyValid x) $ (map (map getPassportField . concatMap words) . paragraphs . lines) input
