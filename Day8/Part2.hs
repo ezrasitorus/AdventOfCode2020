@@ -1,4 +1,4 @@
-import Data.Maybe
+import Data.Maybe ( fromJust, isJust )
 
 getCode :: String -> (String, Int)
 getCode str = (code, sign * read num)
