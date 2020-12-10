@@ -4,9 +4,6 @@ import Data.List ( sort )
 getSortedInts :: [String] -> [Int]
 getSortedInts = sort . map read
 
-diffCounter :: [Int] -> Int -> Int
-diffCounter as  diff = length $ filter (\(x, y) -> y - x == diff) $ zip as (tail as)
-
 countWays :: Int -> [(Int, Int)] -> Int -> [(Int, Int)]
 countWays max visited curr
     = (curr, sum possibleWays) : visited
@@ -17,8 +14,5 @@ countWays max visited curr
 main :: IO ()
 main = do
     input <- readFile "input.txt"
-    let sortedNums = (getSortedInts . lines) input
-    let rev = reverse $ 0 : sortedNums
-    let max = head rev
-    let memo = foldl (countWays max) [] rev
-    print $ fromJust $ lookup 0 memo
+    let nums@(max:_) = reverse $ 0 : (getSortedInts . lines) input
+    print $ fromJust $ lookup 0 $ foldl (countWays max) [] nums
